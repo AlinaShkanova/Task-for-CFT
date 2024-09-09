@@ -24,6 +24,12 @@ mvn validate проверка код-стайл
 
 mvn compile компиляция
 
+mvn clean package сборка jar-файла
+
+Прмер запуска джарника с входными параметрами
+java -jar target/Task-for-CFT-1.0-SNAPSHOT.jar -s -a -p sample- in1.txt in2.txt
+
+
 ```
 ## Технологический стэк ключевой и зависимый
 
