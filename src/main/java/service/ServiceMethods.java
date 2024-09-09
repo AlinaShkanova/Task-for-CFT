@@ -3,15 +3,15 @@ package service;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import static util.Constants.INTEGER_NUMBERS;
-import static util.Constants.SLASH;
 
 @Slf4j
 public class ServiceMethods {
@@ -110,13 +110,25 @@ public class ServiceMethods {
         }
     }
 
-    private static void writeToFile(String outputDir,
-                                    String fileName,
-                                    List<?> data,
-                                    boolean append) throws IOException {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(outputDir + SLASH + fileName, append))) {
-            for (Object obj : data) {
-                writer.println(obj);
+    /**
+     * Записывает данные в файл
+     *
+     * @param outputDir каталог
+     * @param fileName имя файла
+     * @param data данные
+     * @param append флаг, указываеит перезаписать файл или добавить к существующему файлу
+     * @throws IOException ошибка при записи в файл
+     */
+    public static void writeToFile(String outputDir, String fileName, List<?> data, boolean append)
+            throws IOException {
+        File file = new File(outputDir, fileName);
+        if (file.exists() && !append) {
+            file.delete();
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, !append))) {
+            for (Object value : data) {
+                writer.write(value.toString());
+                writer.newLine();
             }
         }
     }
