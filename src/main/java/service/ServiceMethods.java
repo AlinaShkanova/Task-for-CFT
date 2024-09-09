@@ -1,6 +1,5 @@
 package service;
 
-import lombok.extern.slf4j.Slf4j;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,7 +12,6 @@ import java.util.List;
 
 import static util.Constants.INTEGER_NUMBERS;
 
-@Slf4j
 public class ServiceMethods {
 
     public static List<String> readFile(String filePath) throws IOException {
