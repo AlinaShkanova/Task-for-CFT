@@ -10,8 +10,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static util.Constants.INTEGER_NUMBERS;
+import static util.Constants.COLON;
+import static util.Constants.COUNT_ELEMENTS;
+import static util.Constants.FLOAT_VALUE;
+import static util.Constants.INTEGER_NUMBERS_VALUE;
+import static util.Constants.STATISTIC_FOR;
+import static util.Constants.STRING_VALUE;
 
+/**
+ * Сервисный класс для работы с файлами
+ */
 public class ServiceMethods {
 
     public static List<String> readFile(String filePath) throws IOException {
@@ -61,38 +69,37 @@ public class ServiceMethods {
         if (!integers.isEmpty()) {
             writeToFile(outputDir, prefix + "integers.txt", integers, append);
             if (shortStats) {
-                printStats(INTEGER_NUMBERS, integers);
+                printStatistics(INTEGER_NUMBERS_VALUE, integers);
             } else {
-                printStatsFull(INTEGER_NUMBERS, integers);
+                printStatisticsFull(INTEGER_NUMBERS_VALUE, integers);
             }
         }
         if (!floats.isEmpty()) {
             writeToFile(outputDir, prefix + "floats.txt", floats, append);
             if (shortStats) {
-                printStats("Вещественные числа", floats);
+                printStatistics(FLOAT_VALUE, floats);
             } else {
-                printStatsFull("Вещественные числа", floats);
+                printStatisticsFull(FLOAT_VALUE, floats);
             }
         }
         if (!strings.isEmpty()) {
             writeToFile(outputDir, prefix + "strings.txt", strings, append);
             if (shortStats) {
-                printStats("Строки", strings);
+                printStatistics(STRING_VALUE, strings);
             } else {
-                printStatsFull("Строки", strings);
+                printStatisticsFull(STRING_VALUE, strings);
             }
         }
     }
 
-    private static void printStats(String typeName, List<?> data) {
-        System.out.println("Статистика для " + typeName + ":");
-        System.out.println("Количество элементов: " + data.size());
+    private static void printStatistics(String typeName, List<?> data) {
+        System.out.println(STATISTIC_FOR + typeName + COLON);
+        System.out.println(COUNT_ELEMENTS + data.size());
     }
 
-    private static void printStatsFull(String typeName, List<?> data) {
-        System.out.println("Статистика для " + typeName + ":");
-        System.out.println("Количество элементов: " + data.size());
-
+    private static void printStatisticsFull(String typeName, List<?> data) {
+        System.out.println(STATISTIC_FOR + typeName + COLON);
+        System.out.println(COUNT_ELEMENTS + data.size());
         if (data.stream().allMatch(Number.class::isInstance)) {
             List<Number> numbers = (List<Number>) data;
             double sum = numbers.stream().mapToDouble(Number::doubleValue).sum();
@@ -130,5 +137,4 @@ public class ServiceMethods {
             }
         }
     }
-
 }
