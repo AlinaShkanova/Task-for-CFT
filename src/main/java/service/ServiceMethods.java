@@ -60,12 +60,10 @@ public class ServiceMethods {
         List<Integer> integers = new ArrayList<>();
         List<Float> floats = new ArrayList<>();
         List<String> strings = new ArrayList<>();
-
         for (String filePath : filePaths) {
             List<String> lines = readFile(filePath);
             separateData(lines, integers, floats, strings);
         }
-
         if (!integers.isEmpty()) {
             writeToFile(outputDir, prefix + "integers.txt", integers, append);
             if (shortStats) {
@@ -92,11 +90,23 @@ public class ServiceMethods {
         }
     }
 
+    /**
+     * Выводит данные минимальной статистики
+     *
+     * @param typeName имя типа данных
+     * @param data данные
+     */
     private static void printStatistics(String typeName, List<?> data) {
         System.out.println(STATISTIC_FOR + typeName + COLON);
         System.out.println(COUNT_ELEMENTS + data.size());
     }
 
+    /**
+     * Выводит данные полной статистики
+     *
+     * @param typeName имя типа данных
+     * @param data данные
+     */
     private static void printStatisticsFull(String typeName, List<?> data) {
         System.out.println(STATISTIC_FOR + typeName + COLON);
         System.out.println(COUNT_ELEMENTS + data.size());
