@@ -1,6 +1,5 @@
 package service;
 
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -21,7 +20,13 @@ import static util.Constants.STRING_VALUE;
  * Сервисный класс для работы с файлами
  */
 public class ServiceMethods {
-
+    /**
+     * Чтение файла и возврат его содержимого в виде списка строк
+     *
+     * @param filePath путь к файлу для чтения
+     * @return список строк, содержащий содержимое файла
+     * @throws IOException если возникла ошибка при чтении файла
+     */
     public static List<String> readFile(String filePath) throws IOException {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
@@ -33,6 +38,14 @@ public class ServiceMethods {
         return lines;
     }
 
+    /**
+     * Разделение данных на целые числа, числа с плавающей точкой и строки
+     *
+     * @param lines список строк для разделения
+     * @param integers список целых чисел, полученных в результате разделения
+     * @param floats список чисел с плавающей точкой, полученных в результате разделения
+     *@param strings список строк, полученных в результате разделения
+     */
     public static void separateData(List<String> lines,
                                     List<Integer> integers,
                                     List<Float> floats,
@@ -52,6 +65,16 @@ public class ServiceMethods {
         }
     }
 
+    /**
+     * Обработка файлов и запись данных в отдельные файлы
+     *
+     * @param filePaths список путей к файлам для обработки
+     * @param outputDir каталог для записи файлов с результатами
+     * @param prefix префикс для имен файлов с результатами
+     * @param append флаг, указывающий на необходимость добавления к существующим файлам
+     * @param shortStats флаг, указывающий на необходимость вывода статистики
+     * @throws IOException если возникла ошибка при чтении или записи файлов
+     */
     public static void processFiles(List<String> filePaths,
                                     String outputDir,
                                     String prefix,
@@ -91,7 +114,7 @@ public class ServiceMethods {
     }
 
     /**
-     * Выводит данные минимальной статистики
+     * Метод для вывода данных минимальной статистики
      *
      * @param typeName имя типа данных
      * @param data данные
@@ -102,7 +125,7 @@ public class ServiceMethods {
     }
 
     /**
-     * Выводит данные полной статистики
+     * Метод для вывода данных полной статистики
      *
      * @param typeName имя типа данных
      * @param data данные
@@ -126,7 +149,7 @@ public class ServiceMethods {
     }
 
     /**
-     * Записывает данные в файл
+     * Метод для записи данных в файл
      *
      * @param outputDir каталог
      * @param fileName имя файла

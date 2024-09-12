@@ -20,9 +20,11 @@ import static util.Constants.SHORT_STATISTIC_OPTION;
  * Класс для обработки командной строки
  */
 public class MethodsForCommand {
-
     /**
      * Метод для создания списка командных опций
+     *
+     * @return объект содержащий параметры для парсинга параметров
+     * командной строки
      */
     protected static Options createOptions() {
         Options options = new Options();
@@ -51,6 +53,11 @@ public class MethodsForCommand {
 
     /**
      * Метод для парсинга командных аргументов
+     *
+     * @param options содержит параметры для разбора
+     * @param args массив строк, содержит параметры командной строки
+     * @return содержащит результаты командной строки
+     * @throws org.apache.commons.cli.ParseException если произошла ошибка при разборе параметров
      */
     protected static CommandLine parseArgs(Options options, String[] args)
             throws org.apache.commons.cli.ParseException {
@@ -60,6 +67,9 @@ public class MethodsForCommand {
 
     /**
      * Метод для получения путей к файлам из командных аргументов
+     *
+     * @param cmd содержит параметры командной строки
+     * @return список строк, содержащий пути к файлам
      */
     protected static List<String> getFilePaths(CommandLine cmd) {
         List<String> filePaths = new ArrayList<>();
@@ -71,6 +81,8 @@ public class MethodsForCommand {
 
     /**
      * Метод для получения каталога вывода из командных опций
+     * @param cmd содержит параметры командной строки
+     * @return строка, содержащая путь к директории вывода
      */
     protected static String getOutputDir(CommandLine cmd) {
         return cmd.getOptionValue(OUTPUT_OPTION, System.getProperty(ROOT_DIRECTORY));
@@ -78,6 +90,9 @@ public class MethodsForCommand {
 
     /**
      * Метод для получения префикса из командных опций
+     *
+     * @param cmd содержит параметры командной строки
+     * @return строка, содержащая префикс
      */
     protected static String getPrefix(CommandLine cmd) {
         return cmd.getOptionValue(PREFIX_OPTION, QUOTES);
@@ -85,6 +100,9 @@ public class MethodsForCommand {
 
     /**
      * Метод для проверки опций "-a", "-s" и "-f"
+     *
+     * @param cmd содержит параметры командной строки
+     * @return массив содержит флаги в порядке возврата
      */
     protected static boolean[] getFlags(CommandLine cmd) {
         boolean append = cmd.hasOption(APPEND_OPTION);
